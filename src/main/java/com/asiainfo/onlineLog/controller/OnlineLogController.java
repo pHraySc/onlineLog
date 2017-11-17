@@ -22,7 +22,7 @@ import java.util.HashMap;
 @RequestMapping("/tas/aibi_tas/comp")
 public class OnlineLogController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OnlineLogController.class);
+    private static Logger logger = LoggerFactory.getLogger(OnlineLogController.class);
 
     @Autowired
     private IOnlineLogService onlineLogService;

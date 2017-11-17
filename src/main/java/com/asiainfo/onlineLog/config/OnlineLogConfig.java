@@ -33,7 +33,7 @@ public class OnlineLogConfig {
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/onlineLog/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/*.xml"));
 
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
 
