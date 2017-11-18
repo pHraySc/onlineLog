@@ -12,8 +12,8 @@ public interface IOnlineLogService {
     /**
      * 根据电话号码获取具体信息
      *
-     * @param phoneNo
+     * @param phoneNo, startTime, endTime
      * @return List
      */
-    List<ConcreteUse> queryCompGprsBillInfo(String phoneNo);
+    List<ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime);
 }

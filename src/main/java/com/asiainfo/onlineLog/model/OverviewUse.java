@@ -48,7 +48,7 @@ public class OverviewUse {
     /**
      * 流量值：单位MB
      */
-    private String flow;
+    private String flow = "4E97A6973C19755C";
 
     public String getPhoneNo() {
         return phoneNo;

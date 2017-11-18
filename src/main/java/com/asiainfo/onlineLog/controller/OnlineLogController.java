@@ -70,9 +70,15 @@ public class OnlineLogController {
     }
 
     @ResponseBody
-    @GetMapping("compGprsBillInfo")
-    public Result queryCompGprsBillInfo(@RequestParam(value = "phoneNo") String phoneNo) {
-        List<ConcreteUse> concreteUseList = onlineLogService.queryCompGprsBillInfo(phoneNo);
+    @GetMapping("/compGprsBillInfo")
+    public Result queryCompGprsBillInfo(@RequestParam(value = "phoneNo") String phoneNo,
+                                        @RequestParam(value = "startTime") String startTime,
+                                        @RequestParam(value = "endTime") String endTime) {
+
+        String startTime1 = startTime.replaceAll("[^\\d]", "");
+        String endTime1 = endTime.replaceAll("[^\\d]", "");
+
+        List<ConcreteUse> concreteUseList = onlineLogService.queryCompGprsBillInfo(phoneNo, startTime1, endTime1);
         return ResultUtil.success();
     }
 }

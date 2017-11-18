@@ -17,7 +17,7 @@ public class Decrypt {
         //String start_time=DES.encrypt(args[1]);
         //String end_time=DES.encrypt(args[2]);
         String url = "http://10.113.251.150:13080/tas/aibi_tas/comp/compGprsBill.jsp?charge_id=DDD214161B86B440&ailk_autoLogin_userId=E8EC8AEE117C0B5A&phoneNo=" + "&startTime=" + start_time + "&endTime=" + end_time + "&flow=&billNo=E964D3C848BAD7BAA446CC48184D6C68";
-        System.out.println(url + "---" + "---" + test1);
+        System.out.println(DES.encrypt("0"));
     }
 
 }
