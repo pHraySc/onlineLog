@@ -17,9 +17,9 @@ import java.util.Properties;
  * @Title:  onlineLog
  * @Package com.asiainfo.onlineLog.config
  * @Description: 数据源配置
- * @author: lujango
+ * @author: sc
  * @date: 2017年04月4/25/17日 下午20: 32
- * @updater: lujango
+ * @updater: sc
  * @updates: TODO
  */
 @Configuration
