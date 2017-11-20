@@ -14,10 +14,8 @@ import java.util.List;
 @Service
 public class OnlineLogServiceImpl implements IOnlineLogService {
 
-
     @Autowired
     IOnlineLogDao onlineLogDao;
-
 
     /**
      * 根据电话号码获取具体信息
