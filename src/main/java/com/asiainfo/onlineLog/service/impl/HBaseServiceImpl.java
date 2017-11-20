@@ -2,6 +2,7 @@ package com.asiainfo.onlineLog.service.impl;
 
 import com.asiainfo.onlineLog.model.ConcreteUse;
 import com.asiainfo.onlineLog.service.IHBaseService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -36,6 +38,8 @@ public class HBaseServiceImpl implements IHBaseService {
     @Override
     public List<ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime) {
 
+
+        String month = startTime.substring(0, 6);
 
         String sql = "select * from CD_GPRS_" + month
                 + " where id>'" + start + "' and id<'" + end + "' and busi_id in('" + busi_id.replaceAll("\\|", "','") + "')";

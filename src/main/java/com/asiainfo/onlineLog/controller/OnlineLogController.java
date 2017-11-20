@@ -4,6 +4,7 @@ import com.asiainfo.biframe.utils.string.DES;
 import com.asiainfo.onlineLog.model.ConcreteUse;
 import com.asiainfo.onlineLog.model.OverviewUse;
 import com.asiainfo.onlineLog.model.Result;
+import com.asiainfo.onlineLog.service.IHBaseService;
 import com.asiainfo.onlineLog.service.IOnlineLogService;
 import com.asiainfo.onlineLog.util.ResultUtil;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class OnlineLogController {
 
     @Autowired
     private IOnlineLogService onlineLogService;
+
+    @Autowired
+    private IHBaseService hBaseService;
 
     @ResponseBody
     @GetMapping("/compGprsBill")
@@ -78,7 +82,7 @@ public class OnlineLogController {
         String startTime1 = startTime.replaceAll("[^\\d]", "");
         String endTime1 = endTime.replaceAll("[^\\d]", "");
 
-        List<ConcreteUse> concreteUseList = onlineLogService.queryCompGprsBillInfo(phoneNo, startTime1, endTime1);
+        List<ConcreteUse> concreteUseList = hBaseService.queryCompGprsBillInfo(phoneNo, startTime1, endTime1);
         return ResultUtil.success();
     }
 }
