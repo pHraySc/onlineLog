@@ -2,7 +2,6 @@ package com.asiainfo.onlineLog.service.impl;
 
 import com.asiainfo.onlineLog.model.ConcreteUse;
 import com.asiainfo.onlineLog.service.IHBaseService;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,36 +41,38 @@ public class HBaseServiceImpl implements IHBaseService {
 
         String month = startTime.substring(0, 6);
 
-        String sql = "select * from CD_GPRS_" + month
-                + " where id>'" + start + "' and id<'" + end + "' and busi_id in('" + busi_id.replaceAll("\\|", "','") + "')";
+        String sql = null;
         logger.info("============================查询========================");
         logger.info(sql);
         PreparedStatement pst = null;
         ResultSet rs = null;
         JSONObject json = null;
+        ConcreteUse concreteUse;
+        List<ConcreteUse> concreteUseList = new ArrayList<ConcreteUse>();
         try {
             pst = connection.prepareStatement(sql);
             rs = pst.executeQuery();
-            json = new JSONObject();
-            json.put("phone_no", phone_no);
-            json.put("date", date);
-            JSONArray ja = new JSONArray();
-            JSONObject job = null;
             while (rs.next()) {
-                job = new JSONObject();
-                job.put("busi_id", rs.getString("busi_id"));
-                job.put("flow", rs.getString("flow"));
-                job.put("start_time", rs.getString("start_time"));
-                job.put("end_time", rs.getString("end_time"));
-                job.put("url", rs.getString("acce_url"));
-                ja.put(job);
+
+                concreteUse = new ConcreteUse();
+
+                concreteUse.setAppFlag(rs.getString("appFlag"));
+                concreteUse.setGroupRecordCount(rs.getString("groupRecordCount"));
+                concreteUse.setGroupValueName(rs.getString("groupValueName"));
+                concreteUse.setGroupTotalFlow(rs.getString("groupTotalFlow"));
+                concreteUse.setGroupValue(rs.getString("groupValue"));
+                concreteUse.setAppFlag(rs.getString("appFlag"));
+                concreteUse.setTermName(rs.getString("termName"));
+                concreteUse.setTimeRange(rs.getString("timeRange"));
+                concreteUse.setGroupDetail(rs.getString("groupDetail"));
+
+                concreteUseList.add(concreteUse);
             }
-            json.put("data", ja);
         } catch (SQLException se) {
             se.printStackTrace();
         }
 
-        return null;
+        return concreteUseList;
 
     }
 }

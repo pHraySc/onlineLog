@@ -34,7 +34,7 @@ public class OnlineLogController {
     private IHBaseService hBaseService;
 
     @ResponseBody
-    @GetMapping("/compGprsBill")
+    @RequestMapping("/compGprsBill")
     public Result test(@RequestBody @Valid OverviewUse overviewUse, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());

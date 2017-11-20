@@ -2,8 +2,6 @@ package com.asiainfo.onlineLog.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Pattern;
-
 /**
  * Created by admin on 2017/11/17.
  */
@@ -12,14 +10,14 @@ public class OverviewUse {
     /**
      * 电话号
      */
-    @Pattern(regexp = "^1\\d{10}$", message = "手机号不能为空!")
+    @NotBlank(message = "手机号不能为空!")
     private String phoneNo;
 
     /**
      * 用户登录id
      */
     @NotBlank(message = "用户登录id不能为空!")
-    private String LoginUserId;
+    private String loginUserId;
 
     /**
      * 开始时间
@@ -36,13 +34,13 @@ public class OverviewUse {
     /**
      *
      */
-    @NotBlank(message = "")
+    @NotBlank(message = "billNo不能为空!")
     private String billNo;
 
     /**
      *
      */
-    @NotBlank(message = "")
+    @NotBlank(message = "billNo不能为空!")
     private String chargeId;
 
     /**
@@ -59,11 +57,11 @@ public class OverviewUse {
     }
 
     public String getLoginUserId() {
-        return LoginUserId;
+        return loginUserId;
     }
 
     public void setLoginUserId(String loginUserId) {
-        LoginUserId = loginUserId;
+        this.loginUserId = loginUserId;
     }
 
     public String getStartTime() {
@@ -108,7 +106,7 @@ public class OverviewUse {
 
     public OverviewUse(String phoneNo, String loginUserId, String startTime, String endTime, String billNo, String chargeId, String flow) {
         this.phoneNo = phoneNo;
-        LoginUserId = loginUserId;
+        this.loginUserId = loginUserId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.billNo = billNo;
