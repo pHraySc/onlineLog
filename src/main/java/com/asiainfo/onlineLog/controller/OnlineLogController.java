@@ -22,7 +22,7 @@ import java.util.List;
  * Created by admin on 2017/11/16.
  */
 @Controller
-@RequestMapping("/tas/aibi_tas/comp")
+@RequestMapping("/onlineLog")
 public class OnlineLogController {
 
     private static Logger logger = LoggerFactory.getLogger(OnlineLogController.class);

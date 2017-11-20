@@ -1,0 +1,369 @@
+/*通用*/
+*{
+	margin:0;
+	padding:0;
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+ul{
+	list-style: none;
+}
+.clearfix:after{
+	display: block;
+	content:".";
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.lt{
+	float: left;
+}
+.rt{
+	float: right;
+}
+body{
+	position: relative;
+	min-width: 1270px;
+	min-height: 600px;
+	height:auto !important;
+	height:600px;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+.template{
+	display: none;
+}
+.margin-left-5{
+	margin-left: 5px;
+}
+/*最左边的div*/
+.left_container{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 66;
+	text-align: center;
+	width: 154px;
+	height: 100%;
+	float: left;
+	box-shadow: 5px 0 15px 0 rgba(29,40,87,.36);
+	background: linear-gradient(#505dfb, #516298);
+	background-color: #515FDF;
+}
+
+.header{
+	margin-top: 20px;
+}
+.header>span{
+	display: block;
+	_display: inline-block;
+	width: 90px;
+	height: 90px;
+	background:url(../image/portrait.png) no-repeat center;
+	_background-color: #515FDF;
+}
+.lbox{
+	margin-top: 24px;
+	height: 70px;
+	text-align: center;
+}
+.btn{
+	display: inline-block;
+	width: 52px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 12px;
+	outline: none;
+	cursor: pointer;
+}
+.btn-default{
+	background: url("../image/bg_btn01.png") no-repeat center;
+	color: #62646c;
+}
+.btn-default:hover{
+	background: url("../image/bg_btn03.png") no-repeat center;
+	color: #c0c2ca;
+}
+.btn-blue{
+	background: url("../image/bg_btn02.png") no-repeat center;
+	color: #4c8ff5;
+}
+/*中间的div*/
+.mid{
+	position: relative;
+	margin-left: 154px;
+	margin-right: 336px;
+	height: 100%;
+	box-shadow: 5px 0 15px 0 rgba(29,40,87,.14);
+	z-index: 6;
+	overflow-y: hidden;
+}
+.mid-head{
+	background-color: #f7f8fb;
+	height: 34px;
+	border-bottom: 1px solid;
+	border-color: #e2e5ee;
+	color: #666775;
+}
+.mid-head>span:first-child{
+	font-size: 14px;
+	color: #666775;
+	line-height: 34px;
+	margin-left: 20px;
+	font-weight: bold;
+}
+.mid-head>span.btn{
+	margin-top: 5px;
+	margin-right: 20px;
+}
+.mid-foot{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	background: #ffffff;
+	border-top: 1px solid #e4e8ed;
+	text-align: center;
+	cursor: pointer;
+}
+.fixed-foot{
+	position: absolute;
+	bottom: 0;
+}
+.mid-foot:hover{
+	color: #2a2b31;
+	text-decoration: underline;
+}
+.inner-midbox-scroll{
+	overflow-y: auto;
+	overflow-x: auto;
+}
+.mid-inner-mid{
+	position: relative;
+}
+.mid-inner-mid .row{
+	position: relative;
+	height: 84px;
+	width: 100%;
+	vertical-align: middle;
+	border-bottom: 1px solid #e4e8ed;
+	cursor: pointer;
+}
+.mid-inner-mid .row:hover{
+	background: #f1fdf6;
+}
+.mid-inner-mid .row.selected{
+	background: #f1fdf6;
+}
+.row.even{
+	background: #fcfcfd;
+}
+.row-lt-box{
+	position: absolute;
+	left: 0;
+	padding: 20px 0;
+	padding-left: 10px;
+	*padding-left: 20px;
+}
+.row-lt-box span{
+	margin-left: 26px;
+	vertical-align: middle;
+}
+.row-rt-box{
+	margin-left: 94px;
+	padding: 15px 0 15px 10px;
+	height: 100%;
+}
+.app-group{
+	display: inline-block;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 4px;
+	margin-left: 10px;
+	font-size: 12px;
+	color: #4c8ff5;
+	border: 1px solid #4c8ff5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.approval-icon-default{
+	position: relative;
+	display: inline-block;
+	width: 49px;
+	height: 23px;
+	vertical-align: middle;
+	background: url("../image/no_approval.png") no-repeat center;
+	cursor: pointer;
+}
+.approval-icon{
+	background: url("../image/approval.png") no-repeat center;
+}
+.app-icon-default{
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 44px;
+	vertical-align: middle;
+	background: url("../image/ico_app02.png") no-repeat center;
+}
+.app-icon{
+	background: url("../image/ico_app01.png") no-repeat center;
+}
+ul.item{
+	width: 100%;
+}
+ul.item li{
+	float: left;
+}
+ul.item li:first-child{
+	width: 80%;
+}
+ul.item-top{
+	margin-bottom: 15px;
+}
+ul.item-top li:first-child{
+	font-size: 14px;
+	font-weight: 600;
+}
+ul.item-bottom li span{
+	font-size: 12px;
+	color: #a5a6b3;
+}
+.flow-box{
+	display: inline-block;
+	padding: 0 5px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.flow-box.orange{
+	border: 1px solid #fd8610;
+	background: #fff8f2;
+	color: #fd8610;
+	font-size: 14px;
+}
+.flow-box.blue{
+	border: 1px solid #f4f8ff;
+	color: #f4f8ff;
+	background: #4c8ff5;
+}
+.flow-box b{
+	font-weight: normal;
+}
+/*右边的div*/
+.righter{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 336px;
+	*width: 260px;
+	background-color: #f1fdf6;
+	padding: 20px 38px 38px 38px;
+}
+div.title{
+	margin-bottom: 18px;
+}
+div.title>span{
+	font-size: 16px;
+	color: #2a2b31;
+	font-weight: 600;
+	margin-left: 10px;
+}
+.righter-content>p{
+	font-size: 12px;
+	color: #626370;
+	line-height: 26px;
+	text-indent: 26px;
+}
+
+
+.font_style{
+	font-size: 14px;
+	color: #bdc3f3;
+}
+.left_info{
+	padding-left: 25px;
+	float: left;
+	width: 100%;
+}
+.left_ms{
+	background-color: #4755d8;
+	float: left;
+	text-align: center;
+	position: relative;
+	left: 10%;
+	border-radius: 4px;
+	padding: 10px 10px 10px 10px;
+	margin-top: 10px;
+}
+.live_center{
+	display: flex;
+	height: 84px;
+	line-height: 84px;
+	margin-left: 20px;
+	align-items: center;
+	float: left;
+}
+.live_a{
+	display: flex;
+	align-items: center;
+}
+/*popupBox*/
+.popupBox{
+	display: none;
+	position: absolute;
+	top: 34px;
+	right: 336px;
+/*	width: 294px;*/
+	background: #fff;
+	border: 1px solid #D0D3DD;
+	z-index: 66;
+}
+.popup-head{
+	background: #f7f8fb;
+}
+.popupBox .popup-head span{
+	font-size: 12px;
+}
+.popup-main{
+	padding: 10px 14px;
+}
+.popup-ul li{
+	position: relative;
+	height: 34px;
+	line-height: 34px;
+	text-align: left;
+}
+.popup-ul p.float-box{
+	display: none;
+	position: absolute;
+	left: 100px;
+	top: 30px;
+	width: 280px;
+	padding: 8px 14px;
+	background: #fff8f2;
+	border: 1px solid #fd8610;
+	line-height: 20px;
+	color: #fd8610;
+	font-size: 12px;
+	z-index: 99;
+}
+.radio-box label{
+	font-size: 12px;
+	cursor: pointer;
+}
+.radio-box input{
+	margin-right: 6px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.popup-foot{
+	padding: 0 14px 20px 14px;
+}

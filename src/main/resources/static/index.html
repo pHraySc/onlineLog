@@ -1,0 +1,150 @@
+<html>
+	<head>
+		<title>流量详情</title>
+		<meta http-equiv="x-ua-compatible" content="ie=7" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<link rel="stylesheet" type="text/css" href="./css/nav.css">
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+    <input type="hidden" id="loginUserId">
+    <input type="hidden" id="chargeId">
+	<!--这是最左边的div-->
+	<div class="left_container border-shadow">
+		<div class="header">
+			<span></span>
+		</div>
+		<div class="lbox">
+			<div class="left_info">
+				<div style="float: left;"><img src="image/tel.png"></div>
+				<div style="float: left;"><span class="font_style">电话号码</span></div>
+			</div>
+			<div class="left_ms">
+				<span class="font_style" id="phoneNo">13541001229</span>
+			</div>
+		</div>
+		<div class="lbox">
+			<div class="left_info">
+				<div style="float: left;"><img src="image/flow.png"></div>
+				<div style="float: left;"><span class="font_style">计费流量</span></div>
+			</div>
+			<div class="left_ms">
+				<span class="font_style"><span id="flow"></span>MB</span>
+			</div>
+		</div>
+		<div class="lbox">
+			<div class="left_info">
+				<div style="float: left;"><img src="image/type.png"></div>
+				<div style="float: left;"><span class="font_style">流量类型</span></div>
+			</div>
+			<div class="left_ms">
+				<span class="font_style" id="flowType">2G闲时流量</span>
+			</div>
+		</div>
+		<div class="lbox">
+			<div class="left_info">
+				<div style="float: left;"><img src="image/time.png"></div>
+				<div style="float: left;"><span class="font_style">时间段</span></div>
+			</div>
+			<div class="left_ms" style="width: 100px;text-align: left;">
+				<span class="font_style" id="startTime">2017-09-11 14:34:25</span>
+				<p class="font_style">~</p>
+				<span class="font_style" id="endTime">2017-09-11 14:34:25</span>
+			</div>
+		</div>
+	</div>
+	<!--中间的div-->
+	<div class="mid border-shadow">
+		<div class="mid-head clearfix">
+			<span class="lt">共运行了 <span id="totalAppNum">133</span> 款软件</span>
+			<span class="rt btn btn-default j-disagree">不认可</span>
+		</div>
+		<div class="mid-inner-mid">
+			<div class="rows-wrap">
+
+			</div>
+		</div>
+		<div class="mid-foot fixed-foot">
+			<span class="j-loadAll">
+				<span>加载全部</span>
+				<i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</span>
+		</div>
+	</div>
+	<!--右边的div-->
+	<div class="righter">
+		<div class="title">
+			<i class="app-icon-default"></i>
+			<span class="detail-name"></span>
+		</div>
+		<div class="righter-content">
+			<p>
+
+			</p>
+		</div>
+	</div>
+
+	<!--start template-->
+	<div class="template template-row">
+		<div class="row clearfix" data-appid="groupValue">
+			<div class="row-lt-box">
+				<span class="app-icon-default"></span>
+			</div>
+			<div class="row-rt-box">
+				<ul class="item item-top clearfix">
+					<li>
+						<b data-key="groupValueName"></b>
+						<span class="app-group">视频类</span>
+					</li>
+					<li>
+						<span class="flow-box orange">
+							<b data-key="groupTotalFlow"></b>
+							<b>MB</b>
+						</span>
+					</li>
+				</ul>
+				<ul class=" item item-bottom clearfix">
+					<li>
+						<span>上网时间：</span>
+						<span data-key="timeRange"></span>
+						<span class="margin-left-5">终端：</span>
+						<span data-key="termName"></span>
+					</li>
+					<li>
+						<span>占比：</span>
+						<span data-key="percent"></span>
+						<span>%</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--end template-->
+	<!--start popupBox 不认可原因列表-->
+	<div class="popupBox">
+		<div class="mid-head popup-head">
+			<span>不认可原因：</span>
+		</div>
+		<div class="popup-main">
+			<form id="disAgreeReasons">
+				<ul class="popup-ul radio-box">
+					<!--<li>
+						<input type="radio" id="1" name="reasons"/>
+						<label for="1">客户不认可改时间段有上网行为</label>
+						<p class="float-box">你好，现在只能手机功能很强大，很多情况都可以导致连接网络，比如手机内置软件自动更新或者升级都可以产生流量，为了昌盛不必要的流量，使用手机时记得关闭自动更新程序，好吗？</p>
+					</li>-->
+				</ul>
+			</form>
+		</div>
+		<div class="popup-foot">
+			<span class="btn btn-blue j-ensure">确定</span>
+			<span class="btn btn-default j-cancel">取消</span>
+		</div>
+	</div>
+	<!--end popupBox 不认可原因列表-->
+	</body>
+
+	<script type="text/javascript" src="./js/data.js"></script>
+	<script type="text/javascript" src="./lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="./js/webBlog.js"></script>
+</html>
