@@ -35,7 +35,7 @@ public class OnlineLogController {
 
     @ResponseBody
     @RequestMapping("/compGprsBill")
-    public Result test(@RequestBody @Valid OverviewUse overviewUse, BindingResult bindingResult) {
+    public Result compGprsBill(@RequestBody @Valid OverviewUse overviewUse, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }

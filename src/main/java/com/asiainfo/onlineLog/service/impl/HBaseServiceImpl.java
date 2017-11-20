@@ -2,7 +2,7 @@ package com.asiainfo.onlineLog.service.impl;
 
 import com.asiainfo.onlineLog.model.ConcreteUse;
 import com.asiainfo.onlineLog.service.IHBaseService;
-import net.sf.json.JSONObject;
+import com.asiainfo.onlineLog.util.MD5RowKeyGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,15 +41,46 @@ public class HBaseServiceImpl implements IHBaseService {
     @Override
     public List<ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime) {
 
+        String sql;
+        String month1 = startTime.substring(0, 6);
+        String month2 = startTime.substring(0, 6);
 
-        String month = startTime.substring(0, 6);
+        String md5PhoneNo = new MD5RowKeyGenerator().generatePrefix(phoneNo);
+        StringBuffer str1 = new StringBuffer();
+        String idStart = str1.append(md5PhoneNo).append(phoneNo).append(startTime).toString();
 
-        String sql = null;
+        StringBuffer str2 = new StringBuffer();
+        String idEnd = str2.append(md5PhoneNo).append(phoneNo).append(endTime).toString();
+
+
+        if (month1.equals(month2)) {
+
+            sql = "select BUSI_ID, count(BUSI_ID) as GROUPCOUNT, SUM(TO_NUMBER(FLOW)/1024/1024) as ALIASFLOW," +
+                    " MAX(APP_EXT_FLAG) as APPEXTFLAG," + "MAX(END_TIME) as MAXTIME, MIN(END_TIME) as MINTIME, " +
+                    " MAX(TERM_MODEL_ID) as TERMMODELID " +
+                    " MAX(TERM_MODEL_CODE) as TERMMODELCODE \n" +
+                    "from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd + "' group by BUSI_ID ";
+        } else {
+
+            StringBuffer str3 = new StringBuffer();
+            String month3 = LocalDate.parse(month1 + "01", DateTimeFormatter.ofPattern("yyyyMMdd")).with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+            String idEnd1 = str3.append(md5PhoneNo).append(phoneNo).append(month3 + "235959").toString();
+
+            String month4 = month2 + "01000000";
+
+            String idStart1 = str3.append(md5PhoneNo).append(phoneNo).append(month4).toString();
+
+            sql = "select BUSIID, count(BUSI_ID) as GROUPCOUNT, SUM(TO_NUMBER(FLOW)/1024/1024) as ALIASFLOW, MAX(APP_EXT_FLAG) as APPEXTFLAG, " +
+                    " MAX(END_TIME) as MAXTIME, MIN(END_TIME) as MINTIME, MAX(TERM_MODEL_ID) as TERMMODELID " +
+                    " MAX(TERM_MODEL_CODE) as TERMMODELCODE from \n" +
+                    "(select * from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd1 +
+                    "' union all" +
+                    "select * from CD_GPRS_" + month2 + " where  ID> '" + idStart1 + "' and ID<= '" + idEnd + "' ) a";
+        }
         logger.info("============================查询========================");
         logger.info(sql);
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        JSONObject json = null;
+        PreparedStatement pst;
+        ResultSet rs;
         ConcreteUse concreteUse;
         List<ConcreteUse> concreteUseList = new ArrayList<ConcreteUse>();
         try {
@@ -56,15 +90,14 @@ public class HBaseServiceImpl implements IHBaseService {
 
                 concreteUse = new ConcreteUse();
 
-                concreteUse.setAppFlag(rs.getString("appFlag"));
-                concreteUse.setGroupRecordCount(rs.getString("groupRecordCount"));
-                concreteUse.setGroupValueName(rs.getString("groupValueName"));
-                concreteUse.setGroupTotalFlow(rs.getString("groupTotalFlow"));
-                concreteUse.setGroupValue(rs.getString("groupValue"));
-                concreteUse.setAppFlag(rs.getString("appFlag"));
-                concreteUse.setTermName(rs.getString("termName"));
-                concreteUse.setTimeRange(rs.getString("timeRange"));
-                concreteUse.setGroupDetail(rs.getString("groupDetail"));
+                concreteUse.setBusiId(rs.getString("BUSIID"));
+                concreteUse.setGroupCount(rs.getString("GROUPCOUNT"));
+                concreteUse.setAliasFlow(rs.getString("ALIASFLOW"));
+                concreteUse.setAppExtFlag(rs.getString("APPEXTFLAG"));
+                concreteUse.setMaxTime(rs.getString("MAXTIME"));
+                concreteUse.setMinTime(rs.getString("MINTIME"));
+                concreteUse.setTermModelId(rs.getString("TERMMODELID"));
+                concreteUse.setTermModelCode(rs.getString("TERMMODELCODE"));
 
                 concreteUseList.add(concreteUse);
             }

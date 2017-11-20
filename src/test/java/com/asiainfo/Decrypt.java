@@ -2,6 +2,10 @@ package com.asiainfo;
 
 import com.asiainfo.biframe.utils.string.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
+
 
 public class Decrypt {
     public static void main(String[] args) throws Exception {
@@ -18,6 +22,7 @@ public class Decrypt {
         //String end_time=DES.encrypt(args[2]);
         String url = "http://10.113.251.150:13080/tas/aibi_tas/comp/compGprsBill.jsp?charge_id=DDD214161B86B440&ailk_autoLogin_userId=E8EC8AEE117C0B5A&phoneNo=" + "&startTime=" + start_time + "&endTime=" + end_time + "&flow=&billNo=E964D3C848BAD7BAA446CC48184D6C68";
         System.out.println(DES.encrypt("0"));
+        System.out.printf(LocalDate.parse("20171001", DateTimeFormatter.ofPattern("yyyyMMdd")).with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
     }
 
 }

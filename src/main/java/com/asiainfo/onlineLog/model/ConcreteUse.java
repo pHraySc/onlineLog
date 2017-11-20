@@ -8,118 +8,118 @@ public class ConcreteUse {
     /**
      *
      */
-    private String groupRecordCount;
+    private String busiId;
 
     /**
      *
      */
-    private String groupValueName;
+    private String groupCount;
 
     /**
      *
      */
-    private String groupTotalFlow;
+    private String aliasFlow;
 
     /**
      *
      */
-    private String groupValue;
+    private String appExtFlag;
 
     /**
      *
      */
-    private String appFlag;
+    private String maxTime;
 
     /**
      *
      */
-    private String termName;
+    private String minTime;
 
     /**
      *
      */
-    private String timeRange;
+    private String termModelId;
 
     /**
      *
      */
-    private String groupDetail;
+    private String termModelCode;
 
     public ConcreteUse() {
     }
 
-    public ConcreteUse(String groupRecordCount, String groupValueName, String groupTotalFlow, String groupValue, String appFlag, String termName, String timeRange, String groupDetail) {
-        this.groupRecordCount = groupRecordCount;
-        this.groupValueName = groupValueName;
-        this.groupTotalFlow = groupTotalFlow;
-        this.groupValue = groupValue;
-        this.appFlag = appFlag;
-        this.termName = termName;
-        this.timeRange = timeRange;
-        this.groupDetail = groupDetail;
+    public ConcreteUse(String busiId, String groupCount, String aliasFlow, String appExtFlag, String maxTime, String minTime, String termModel, String termModelCode) {
+        this.busiId = busiId;
+        this.groupCount = groupCount;
+        this.aliasFlow = aliasFlow;
+        this.appExtFlag = appExtFlag;
+        this.maxTime = maxTime;
+        this.minTime = minTime;
+        this.termModelId = termModel;
+        this.termModelCode = termModelCode;
     }
 
-    public String getGroupRecordCount() {
-        return groupRecordCount;
+    public String getBusiId() {
+        return busiId;
     }
 
-    public void setGroupRecordCount(String groupRecordCount) {
-        this.groupRecordCount = groupRecordCount;
+    public void setBusiId(String busiId) {
+        this.busiId = busiId;
     }
 
-    public String getGroupValueName() {
-        return groupValueName;
+    public String getGroupCount() {
+        return groupCount;
     }
 
-    public void setGroupValueName(String groupValueName) {
-        this.groupValueName = groupValueName;
+    public void setGroupCount(String groupCount) {
+        this.groupCount = groupCount;
     }
 
-    public String getGroupTotalFlow() {
-        return groupTotalFlow;
+    public String getAliasFlow() {
+        return aliasFlow;
     }
 
-    public void setGroupTotalFlow(String groupTotalFlow) {
-        this.groupTotalFlow = groupTotalFlow;
+    public void setAliasFlow(String aliasFlow) {
+        this.aliasFlow = aliasFlow;
     }
 
-    public String getGroupValue() {
-        return groupValue;
+    public String getAppExtFlag() {
+        return appExtFlag;
     }
 
-    public void setGroupValue(String groupValue) {
-        this.groupValue = groupValue;
+    public void setAppExtFlag(String appExtFlag) {
+        this.appExtFlag = appExtFlag;
     }
 
-    public String getAppFlag() {
-        return appFlag;
+    public String getMaxTime() {
+        return maxTime;
     }
 
-    public void setAppFlag(String appFlag) {
-        this.appFlag = appFlag;
+    public void setMaxTime(String maxTime) {
+        this.maxTime = maxTime;
     }
 
-    public String getTermName() {
-        return termName;
+    public String getMinTime() {
+        return minTime;
     }
 
-    public void setTermName(String termName) {
-        this.termName = termName;
+    public void setMinTime(String minTime) {
+        this.minTime = minTime;
     }
 
-    public String getTimeRange() {
-        return timeRange;
+    public String getTermModelId() {
+        return termModelId;
     }
 
-    public void setTimeRange(String timeRange) {
-        this.timeRange = timeRange;
+    public void setTermModelId(String termModelId) {
+        this.termModelId = termModelId;
     }
 
-    public String getGroupDetail() {
-        return groupDetail;
+    public String getTermModelCode() {
+        return termModelCode;
     }
 
-    public void setGroupDetail(String groupDetail) {
-        this.groupDetail = groupDetail;
+    public void setTermModelCode(String termModelCode) {
+        this.termModelCode = termModelCode;
     }
 }
