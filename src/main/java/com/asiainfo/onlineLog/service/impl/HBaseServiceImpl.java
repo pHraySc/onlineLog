@@ -60,7 +60,7 @@ public class HBaseServiceImpl implements IHBaseService {
                     " MAX(APP_EXT_FLAG) as APPEXTFLAG," + "MAX(END_TIME) as MAXTIME, MIN(END_TIME) as MINTIME, " +
                     " MAX(TERM_MODEL_ID) as TERMMODELID " +
                     " MAX(TERM_MODEL_CODE) as TERMMODELCODE \n" +
-                    "from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd + "' group by BUSI_ID order by ALIASFLOW DESC";
+                    "from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd + "' group by BUSI_ID";
         } else {
 
             StringBuffer str3 = new StringBuffer();
@@ -71,12 +71,12 @@ public class HBaseServiceImpl implements IHBaseService {
 
             String idStart1 = str3.append(md5PhoneNo).append(phoneNo).append(month4).toString();
 
-            sql = "select BUSIID, count(BUSI_ID) as GROUPCOUNT, SUM(TO_NUMBER(FLOW)/1024/1024) as ALIASFLOW, MAX(APP_EXT_FLAG) as APPEXTFLAG, " +
+            sql = "select BUSI_ID, count(BUSI_ID) as GROUPCOUNT, SUM(TO_NUMBER(FLOW)/1024/1024) as ALIASFLOW, MAX(APP_EXT_FLAG) as APPEXTFLAG, " +
                     " MAX(END_TIME) as MAXTIME, MIN(END_TIME) as MINTIME, MAX(TERM_MODEL_ID) as TERMMODELID " +
                     " MAX(TERM_MODEL_CODE) as TERMMODELCODE from \n" +
                     "(select * from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd1 +
                     "' union all" +
-                    "select * from CD_GPRS_" + month2 + " where  ID> '" + idStart1 + "' and ID<= '" + idEnd + "' ) a";
+                    "select * from CD_GPRS_" + month2 + " where  ID> '" + idStart1 + "' and ID<= '" + idEnd + "' ) a group BY BUSI_ID";
         }
         logger.info("============================查询========================");
         logger.info(sql);
@@ -100,9 +100,9 @@ public class HBaseServiceImpl implements IHBaseService {
                     ConcreteUse a = concreteUseMap.get(busiVal[0]);
                     a.setGroupCount(String.valueOf(Integer.parseInt(a.getGroupCount()) + Integer.parseInt(rs.getString("GROUPCOUNT"))));
                     a.setAliasFlow(String.valueOf(Float.parseFloat(a.getAliasFlow()) + Float.parseFloat(rs.getString("ALIASFLOW"))));
-                    concreteUseMap.put(busiVal[0],a);
 
                 } else {
+
                     concreteUse.setBusiName(busiVal[0]);
                     concreteUse.setAppType(busiVal[1]);
                     concreteUse.setExplain(busiVal[2]);

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by admin on 2017/11/16.
@@ -79,22 +81,58 @@ public class OnlineLogController {
     @GetMapping("/compGprsBillInfo")
     public Result queryCompGprsBillInfo(@RequestParam(value = "phoneNo") String phoneNo,
                                         @RequestParam(value = "startTime") String startTime,
-                                        @RequestParam(value = "endTime") String endTime) {
+                                        @RequestParam(value = "endTime") String endTime,
+                                        @RequestParam(value = "flow") String flow) {
+
+        HashMap result;
+
+        ConcreteUse concreteUse;
+
 
         String startTime1 = startTime.replaceAll("[^\\d]", "");
         String endTime1 = endTime.replaceAll("[^\\d]", "");
 
         Map<String, ConcreteUse> concreteUseMap = hBaseService.queryCompGprsBillInfo(phoneNo, startTime1, endTime1);
-        return ResultUtil.success(concreteUseMap);
+
+        Set set = concreteUseMap.keySet();
+
+        Iterator iterator = set.iterator();
+
+        while (iterator.hasNext()) {
+
+            concreteUse = concreteUseMap.get(iterator.next());
+
+            if (Integer.parseInt(flow) == 0) {
+
+                concreteUse.setPercent("0");
+
+            } else {
+
+                float percent = Float.valueOf(concreteUse.getAliasFlow()).floatValue() / Float.valueOf(flow).floatValue();
+
+                concreteUse.setPercent(String.valueOf(percent));
+            }
+
+        }
+
+        int groupCount = concreteUseMap.size();
+
+        result = new HashMap();
+
+        result.put("groupCount", groupCount);
+
+        result.put("concreteUseMap", concreteUseMap);
+
+        return ResultUtil.success(result);
     }
 
     @ResponseBody
     @GetMapping("/queryReasonInfo")
     public Result queryReasonInfo() {
 
-        Map tasApproveExpList = onlineLogService.queryReasonInfo();
+        Map tasApproveExpMap = onlineLogService.queryReasonInfo();
 
-        return ResultUtil.success(tasApproveExpList);
+        return ResultUtil.success(tasApproveExpMap);
     }
 
     @ResponseBody
@@ -103,7 +141,7 @@ public class OnlineLogController {
 
         String[] str = String.valueOf(TabOnloadUtil.tasApproveExpMap.get(id)).split("&");
 
-        TasApproveExp tasApproveExp = new TasApproveExp(id, str[0],str[1]);
+        TasApproveExp tasApproveExp = new TasApproveExp(id, str[0], str[1]);
 
         onlineLogService.saveReansonInfo(tasApproveExp);
 
