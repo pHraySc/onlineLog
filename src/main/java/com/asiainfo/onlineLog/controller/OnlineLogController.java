@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -108,9 +109,12 @@ public class OnlineLogController {
 
             } else {
 
-                float percent = Float.valueOf(concreteUse.getAliasFlow()).floatValue() / Float.valueOf(flow).floatValue();
 
-                concreteUse.setPercent(String.valueOf(percent));
+                DecimalFormat df = new DecimalFormat("#.00");
+
+                float percent = (Float.valueOf(concreteUse.getAliasFlow()).floatValue() / Float.valueOf(flow).floatValue()) * 100;
+
+                concreteUse.setPercent(df.format(percent));
             }
 
         }
