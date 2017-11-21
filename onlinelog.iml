@@ -237,5 +237,7 @@
     <orderEntry type="library" name="Maven: com.ibm.icu:icu4j:60.1" level="project" />
     <orderEntry type="library" name="Maven: com.ibm.icu:icu4j-localespi:60.1" level="project" />
     <orderEntry type="library" name="Maven: com.ibm.icu:icu4j-charset:60.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.6" level="project" />
   </component>
 </module>
