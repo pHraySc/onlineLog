@@ -11,6 +11,15 @@ public class TasApproveExp {
 
     private String reason;
 
+    public TasApproveExp() {
+    }
+
+    public TasApproveExp(String id, String situation, String reason) {
+        Id = id;
+        this.situation = situation;
+        this.reason = reason;
+    }
+
     public String getId() {
         return Id;
     }

@@ -4,9 +4,11 @@ import com.asiainfo.biframe.utils.string.DES;
 import com.asiainfo.onlineLog.model.ConcreteUse;
 import com.asiainfo.onlineLog.model.OverviewUse;
 import com.asiainfo.onlineLog.model.Result;
+import com.asiainfo.onlineLog.model.TasApproveExp;
 import com.asiainfo.onlineLog.service.IHBaseService;
 import com.asiainfo.onlineLog.service.IOnlineLogService;
 import com.asiainfo.onlineLog.util.ResultUtil;
+import com.asiainfo.onlineLog.util.TabOnloadUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by admin on 2017/11/16.
@@ -82,7 +84,29 @@ public class OnlineLogController {
         String startTime1 = startTime.replaceAll("[^\\d]", "");
         String endTime1 = endTime.replaceAll("[^\\d]", "");
 
-        List<ConcreteUse> concreteUseList = hBaseService.queryCompGprsBillInfo(phoneNo, startTime1, endTime1);
+        Map<String, ConcreteUse> concreteUseMap = hBaseService.queryCompGprsBillInfo(phoneNo, startTime1, endTime1);
+        return ResultUtil.success(concreteUseMap);
+    }
+
+    @ResponseBody
+    @GetMapping("/queryReasonInfo")
+    public Result queryReasonInfo() {
+
+        Map tasApproveExpList = onlineLogService.queryReasonInfo();
+
+        return ResultUtil.success(tasApproveExpList);
+    }
+
+    @ResponseBody
+    @PostMapping("/saveReansonInfo")
+    public Result saveReansonInfo(@RequestParam(value = "id") String id) {
+
+        String[] str = String.valueOf(TabOnloadUtil.tasApproveExpMap.get(id)).split("&");
+
+        TasApproveExp tasApproveExp = new TasApproveExp(id, str[0],str[1]);
+
+        onlineLogService.saveReansonInfo(tasApproveExp);
+
         return ResultUtil.success();
     }
 }

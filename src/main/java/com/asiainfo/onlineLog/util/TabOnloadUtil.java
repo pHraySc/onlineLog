@@ -22,9 +22,9 @@ public class TabOnloadUtil {
 
     private static List<TasApproveExp> tasApproveExpList;
 
-    private static Map tasApplicationMap;
+    public static Map tasApplicationMap;
 
-    private static Map tasApproveExpMap;
+    public static Map tasApproveExpMap;
 
 
     static {

@@ -2,7 +2,7 @@ package com.asiainfo.onlineLog.service;
 
 import com.asiainfo.onlineLog.model.ConcreteUse;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by admin on 2017/11/20.
@@ -15,5 +15,5 @@ public interface IHBaseService {
      * @param phoneNo, startTime, endTime
      * @return List
      */
-    public List<ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime);
+    public Map<String, ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime);
 }

@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.asiainfo.onlineLog.dao.IOnlineLogDao">
 
+    <select id="queryTasApplictionList" resultType="com.asiainfo.onlineLog.model.TasApplication">
+        SELECT
+        *
+        FROM
+        tas_application
+    </select>
+
+    <select id="queryTasApproveExpList" resultType="com.asiainfo.onlineLog.model.TasApproveExp">
+      SELECT
+      *
+      FROM
+      tas_approve_explain
+    </select>
 
 
 

@@ -45,6 +45,45 @@ public class ConcreteUse {
      */
     private String termModelCode;
 
+    /**
+     *
+     */
+    private String busiName;
+
+    /**
+     *
+     */
+    private String appType;
+
+    /**
+     *
+     */
+    private String explain;
+
+    public String getBusiName() {
+        return busiName;
+    }
+
+    public void setBusiName(String busiName) {
+        this.busiName = busiName;
+    }
+
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
+    }
+
     public ConcreteUse() {
     }
 

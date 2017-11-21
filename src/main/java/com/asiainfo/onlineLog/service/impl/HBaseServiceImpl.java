@@ -3,6 +3,7 @@ package com.asiainfo.onlineLog.service.impl;
 import com.asiainfo.onlineLog.model.ConcreteUse;
 import com.asiainfo.onlineLog.service.IHBaseService;
 import com.asiainfo.onlineLog.util.MD5RowKeyGenerator;
+import com.asiainfo.onlineLog.util.TabOnloadUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by admin on 2017/11/20.
@@ -39,7 +40,7 @@ public class HBaseServiceImpl implements IHBaseService {
      * @return List
      */
     @Override
-    public List<ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime) {
+    public Map<String,ConcreteUse> queryCompGprsBillInfo(String phoneNo, String startTime, String endTime) {
 
         String sql;
         String month1 = startTime.substring(0, 6);
@@ -59,7 +60,7 @@ public class HBaseServiceImpl implements IHBaseService {
                     " MAX(APP_EXT_FLAG) as APPEXTFLAG," + "MAX(END_TIME) as MAXTIME, MIN(END_TIME) as MINTIME, " +
                     " MAX(TERM_MODEL_ID) as TERMMODELID " +
                     " MAX(TERM_MODEL_CODE) as TERMMODELCODE \n" +
-                    "from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd + "' group by BUSI_ID ";
+                    "from CD_GPRS_" + month1 + " where  ID>= '" + idStart + "' and ID<= '" + idEnd + "' group by BUSI_ID order by ALIASFLOW DESC";
         } else {
 
             StringBuffer str3 = new StringBuffer();
@@ -82,7 +83,7 @@ public class HBaseServiceImpl implements IHBaseService {
         PreparedStatement pst;
         ResultSet rs;
         ConcreteUse concreteUse;
-        List<ConcreteUse> concreteUseList = new ArrayList<ConcreteUse>();
+        Map<String,ConcreteUse> concreteUseMap = new HashMap<String,ConcreteUse>();
         try {
             pst = connection.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -91,21 +92,35 @@ public class HBaseServiceImpl implements IHBaseService {
                 concreteUse = new ConcreteUse();
 
                 concreteUse.setBusiId(rs.getString("BUSIID"));
-                concreteUse.setGroupCount(rs.getString("GROUPCOUNT"));
-                concreteUse.setAliasFlow(rs.getString("ALIASFLOW"));
-                concreteUse.setAppExtFlag(rs.getString("APPEXTFLAG"));
-                concreteUse.setMaxTime(rs.getString("MAXTIME"));
-                concreteUse.setMinTime(rs.getString("MINTIME"));
-                concreteUse.setTermModelId(rs.getString("TERMMODELID"));
-                concreteUse.setTermModelCode(rs.getString("TERMMODELCODE"));
 
-                concreteUseList.add(concreteUse);
+                String[] busiVal = String.valueOf(TabOnloadUtil.tasApplicationMap.get(concreteUse.getBusiId())).split("&");
+
+                if (concreteUseMap.containsKey(busiVal[0])) {
+
+                    ConcreteUse a = concreteUseMap.get(busiVal[0]);
+                    a.setGroupCount(String.valueOf(Integer.parseInt(a.getGroupCount()) + Integer.parseInt(rs.getString("GROUPCOUNT"))));
+                    a.setAliasFlow(String.valueOf(Float.parseFloat(a.getAliasFlow()) + Float.parseFloat(rs.getString("ALIASFLOW"))));
+                    concreteUseMap.put(busiVal[0],a);
+
+                } else {
+                    concreteUse.setBusiName(busiVal[0]);
+                    concreteUse.setAppType(busiVal[1]);
+                    concreteUse.setExplain(busiVal[2]);
+                    concreteUse.setGroupCount(rs.getString("GROUPCOUNT"));
+                    concreteUse.setAliasFlow(rs.getString("ALIASFLOW"));
+                    concreteUse.setAppExtFlag(rs.getString("APPEXTFLAG"));
+                    concreteUse.setMaxTime(rs.getString("MAXTIME"));
+                    concreteUse.setMinTime(rs.getString("MINTIME"));
+                    concreteUse.setTermModelId(rs.getString("TERMMODELID"));
+                    concreteUse.setTermModelCode(rs.getString("TERMMODELCODE"));
+                    concreteUseMap.put(busiVal[0],concreteUse);
+                }
             }
         } catch (SQLException se) {
             se.printStackTrace();
         }
 
-        return concreteUseList;
+        return concreteUseMap;
 
     }
 }
